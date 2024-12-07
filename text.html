@@ -377,11 +377,12 @@ stiffness :[
         array.forEach((item) => {
             const subElement = document.createElement("div");
             subElement.classList.add("sub-element");
-            subElement.textContent = item.name || item.type || item.thickness || "View Details";
+            subElement.textContent = item.name || item.type || item.thickness ||  item.stiffness || "View Details";
             subElement.addEventListener("click", () => handleNested(item, ));
             companyContainer.appendChild(subElement);
         });
     }
+    console.log(Application)
   </script>
 </body>
 </html>

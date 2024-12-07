@@ -189,26 +189,21 @@ selectionDropdown.addEventListener("change", () => {
         selectedItemIndex = parseInt(selectedValue.split('-')[1]);
         selectedCompanyIndex = null;
 
-        // Clear company dropdown and populate based on selected item
         populateCompanies();
     } else if (selectedValue.startsWith("company-")) {
-        // Company is selected
         selectedCompanyIndex = parseInt(selectedValue.split('-')[1]);
 
-        // Clear stock dropdown and populate based on selected company
         populateStock();
     } else if (selectedValue.startsWith("stock-")) {
-        // Stock is selected, display stock details
         const selectedStockIndex = parseInt(selectedValue.split('-')[1]);
         const selectedStock = stationeryItems[selectedItemIndex].companies[selectedCompanyIndex].stock[selectedStockIndex];
         outputDiv.textContent = `Selected Stock: ${selectedStock.label}, Quantity: ${selectedStock.quantity}`;
     }
 });
 
-// Function to populate company options based on selected item
 function populateCompanies() {
     const selectedItem = stationeryItems[selectedItemIndex];
-    selectionDropdown.innerHTML = "<option value=''>-- Select --</option>"; // Reset dropdown
+    selectionDropdown.innerHTML = "<option value=''>-- Select --</option>"; 
 
     selectedItem.companies.forEach((company, index) => {
         const option = document.createElement("option");
@@ -218,10 +213,9 @@ function populateCompanies() {
     });
 }
 
-// Function to populate stock options based on selected company
 function populateStock() {
     const selectedCompany = stationeryItems[selectedItemIndex].companies[selectedCompanyIndex];
-    selectionDropdown.innerHTML = "<option value=''>-- Select --</option>"; // Reset dropdown
+    selectionDropdown.innerHTML = "<option value=''>-- Select --</option>"; 
 
     selectedCompany.stock.forEach((stock, index) => {
         const option = document.createElement("option");
