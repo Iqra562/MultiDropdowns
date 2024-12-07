@@ -35,183 +35,6 @@ Downhill Skiing
 
   <div id="container"></div>
   <div id="company-container"></div>
-  <!-- <script>
-
-
-let companyName= null;
-const stationeryItems = [
-    {
-        item: "Pen",
-        companies: [
-            {
-                name: "Pilot",
-                stock: [
-                    { label: "Black Ink", quantity: 50 },
-                    { label: "Blue Ink", quantity: 30 }
-                ]
-            },
-            {
-                name: "Reynolds",
-                stock: [
-                    { label: "Black Ink", quantity: 20 },
-                    { label: "Blue Ink", quantity: 40 }
-                ]
-            },
-            {
-                name: "Cello",
-                stock: [
-                    { label: "Red Ink", quantity: 25 },
-                    { label: "Green Ink", quantity: 15 }
-                ],
-                stock2: [
-                    { label: "Red Ink", quantity: 25 },
-                    { label: "Green Ink", quantity: 15 }
-                ]
-            }
-        ]
-    },
-    {
-        item: "Notebook",
-        companies: [
-            {
-                name: "Classmate",
-                stock: [
-                    { label: "A5 Size", quantity: 100 },
-                    { label: "B5 Size", quantity: 50 }
-                ]
-            },
-            {
-                name: "Navneet",
-                stock: [
-                    { label: "A4 Size", quantity: 80 },
-                    { label: "B4 Size", quantity: 40 }
-                ]
-            },
-            {
-                name: "Paperkraft",
-                stock: [
-                    { label: "Spiral Bound", quantity: 60 },
-                    { label: "Plain", quantity: 30 }
-                ]
-            }
-        ]
-    },
-    {
-        item: "Pencil",
-        companies: [
-            {
-                name: "Apsara",
-                stock: [
-                    { label: "HB", quantity: 200 },
-                    { label: "2B", quantity: 150 }
-                ]
-            },
-            {
-                name: "Faber-Castell",
-                stock: [
-                    { label: "HB", quantity: 300 },
-                    { label: "2B", quantity: 100 }
-                ]
-            },
-            {
-                name: "Nataraj",
-                stock: [
-                    { label: "4B", quantity: 80 },
-                    { label: "6B", quantity: 50 }
-                ]
-            }
-        ]
-    },
-    {
-        item: "Eraser",
-        companies: [
-            {
-                name: "Natraj",
-                stock: [
-                    { label: "Soft", quantity: 90 },
-                    { label: "Hard", quantity: 60 }
-                ]
-            },
-            {
-                name: "Apsara",
-                stock: [
-                    { label: "Small", quantity: 120 },
-                    { label: "Large", quantity: 70 }
-                ]
-            },
-            {
-                name: "Staedtler",
-                stock: [
-                    { label: "Dust-Free", quantity: 50 },
-                    { label: "Colored", quantity: 30 }
-                ]
-            }
-        ]
-    },
-    {
-        item: "Marker",
-        companies: [
-            {
-                name: "Camlin",
-                stock: [
-                    { label: "Permanent", quantity: 50 },
-                    { label: "Whiteboard", quantity: 30 }
-                ]
-            },
-            {
-                name: "Staedtler",
-                stock: [
-                    { label: "Permanent", quantity: 40 },
-                    { label: "Whiteboard", quantity: 20 }
-                ]
-            },
-            {
-                name: "Sharpie",
-                stock: [
-                    { label: "Fine Tip", quantity: 25 },
-                    { label: "Bold Tip", quantity: 15 }
-                ]
-            }
-        ]
-    }
-];
-
-const container = document.getElementById('container');
-
-stationeryItems.forEach((categoryName) => {
-
-    const subElement = document.createElement('div');
-    subElement.classList.add("sub-element");
-    subElement.textContent = categoryName.item;
-    
-    // Wrap handleCompanyName in an anonymous function to delay invocation
-    subElement.addEventListener('click', () => handleCompanyName(categoryName));
-
-    container.appendChild(subElement);
-});
-
-    function handleCompanyName(item){
-     companyName = item
-     if(companyName){
-        stationeryItems.forEach((items)=>{
-        const categoryObj = items.find(item => item.name === companyName)
- 
-        const subElement = document.createElement('div');
-
-subElement.classList.add("sub-element");
-subElement.textContent = item.name;
-// subElement.addEventListener('click',companyName(subElement.textContent))
-
-container.appendChild(subElement);
-        })
-     }
- 
-        
-    }
- 
-</script>
-
-     -->
      <script>
      const Application = [
         { 
@@ -220,7 +43,7 @@ container.appendChild(subElement);
     sizes: [
         {
             name: "Average",
-            types: [
+            type: [
                 {
                     type: "Soft",
                     suggestedProduct: "MOUNTAINEER TONGUE DUAL DENSITY 12MM"
@@ -246,7 +69,7 @@ container.appendChild(subElement);
             sizes: [
         {
             name: "Average",
-            Stiffness: [
+            stiffness: [
                 {
                     type: "Extra Soft",
                     suggestedProduct: "WINTER BOOT LOW DENSITY 12MM"
@@ -302,7 +125,7 @@ container.appendChild(subElement);
             sizes: [
                 {
                     name: "Extra Slim",
-                    Stiffness :[
+                    stiffness :[
                     {
                     type: "Medium",
                     suggestedProduct: "MOUNTAINEER TONGUE DUAL DENSITY 12MM"
@@ -320,7 +143,7 @@ container.appendChild(subElement);
                 },
         {
             name: "Average",
-            types: [
+            type: [
                 {
                     type: "Extra Soft",
                     suggestedProduct: "WINTER BOOT LOW DENSITY 12MM"
@@ -412,7 +235,7 @@ container.appendChild(subElement);
             
         {
             name: "Average",
-            types: [
+            stiffness: [
                 {
                     type: "Extra Soft",
                     suggestedProduct: "WINTER BOOT LOW DENSITY 12MM"
@@ -479,32 +302,32 @@ stiffness :[
     ]
 
         },
-        {
-            name:"Fat Tire Cycling"
-        },
-        {
-            name:"Ice Climbing"
-        },
-        {
-            name:"Inline Skating"
-        },
-        {
-            name:"Skimo"
-        },
-        {
-            name:"Splitboarding"
-        },
+//         {
+//             name:"Fat Tire Cycling"
+//         },
+//         {
+//             name:"Ice Climbing"
+//         },
+//         {
+//             name:"Inline Skating"
+//         },
+//         {
+//             name:"Skimo"
+//         },
+//         {
+//             name:"Splitboarding"
+//         },
         
-        {
-            name:"Telemark Skiing"
-        },
-        {
-            name:"Waterskiing"
-        },
+//         {
+//             name:"Telemark Skiing"
+//         },
+//         {
+//             name:"Waterskiing"
+//         },
  
-        {
-            name:"Winter Boots"
-  }
+//         {
+//             name:"Winter Boots"
+//   }
 
 
 ];
@@ -515,10 +338,9 @@ stiffness :[
         subElement.classList.add("sub-element");
         subElement.textContent = application.name;
 
-        // Attach click handler
         subElement.addEventListener("click", () => handleSize(application));
         container.appendChild(subElement);
-        console.log( application)
+        // console.log( application)
     });
 
     function handleSize(application) {
@@ -541,21 +363,32 @@ stiffness :[
         const companyContainer = document.getElementById("company-container");
         companyContainer.innerHTML = "";
 
-        if (size.suggestedProduct) {
+        if (size.suggestedProduct ) {
             const productElement = document.createElement("div");
             productElement.classList.add("sub-element");
             productElement.textContent = `Product: ${size.suggestedProduct}`;
             companyContainer.appendChild(productElement);
         }
 
-        // Check for types
-        if (size.types) {
-            size.types.forEach((type) => {
+        if (size.type || size.stiffness ) {
+            const subElement = size.type || size.stiffness
+            subElement.forEach((type) => {
                 const typeElement = document.createElement("div");
                 typeElement.classList.add("sub-element");
                 typeElement.textContent = `${type.type}`;
                 companyContainer.appendChild(typeElement);
                 typeElement.addEventListener("click", () => handleSizeProduct(type));
+
+            });
+        }else if (size.thickness ) {
+            const subElement = size.thickness
+            subElement.forEach((type) => {
+                const typeElement = document.createElement("div");
+                typeElement.classList.add("sub-element");
+                typeElement.textContent = `${type.type}`;
+                companyContainer.appendChild(typeElement);
+                typeElement.addEventListener("click", () => handleSizeProductThickness(type));
+                console.log("thicknessProperty")
 
             });
         }
@@ -569,8 +402,26 @@ stiffness :[
     productElement.textContent = `Suggested Product: ${product.suggestedProduct}`;
     companyContainer.appendChild(productElement);
 }
+
+function handleSizeProductThickness(thicknessProperty) {
+    console.log("thicknessProperty")
+        const companyContainer = document.getElementById("company-container");
+        companyContainer.innerHTML = "";
+
+        thicknessProperty.thickness.forEach((number) => {
+            const sizeElement = document.createElement("div");
+            sizeElement.classList.add("sub-element");
+            sizeElement.textContent = number.thickness;
+
+            // sizeElement.addEventListener("click", () => handleSizeDetails(size));
+            companyContainer.appendChild(sizeElement);
+        });
+    }
     
-console.log(Object.values(Application))
+function createLayout(title){
+
+}
+console.log(Application)
 
     </script>
         

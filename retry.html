@@ -1,4 +1,4 @@
-<!DOCsubArray html>
+<!DOChtml>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -331,70 +331,72 @@ subArray :[
 
 
 ];
-    const container = document.getElementById("container");
+const container = document.getElementById("container");
 
-    Application.forEach((application) => {
-        const subElement = document.createElement("div");
-        subElement.classList.add("sub-element");
-        subElement.textContent = application.name;
+Application.forEach((application) => {
+    const subElement = document.createElement("div");
+    subElement.classList.add("sub-element");
+    subElement.textContent = application.name;
 
-        // Attach click handler
-        subElement.addEventListener("click", () => handleSize(application));
-        container.appendChild(subElement);
-        console.log( application)
+    subElement.addEventListener("click", () => handleSize(application));
+    container.appendChild(subElement);
+    // console.log( application)
+});
+
+function handleSize(application) {
+    container.style.display = "none";
+
+    const companyContainer = document.getElementById("company-container");
+    companyContainer.innerHTML = "";
+
+    application.subArray.forEach((size) => {
+        const sizeElement = document.createElement("div");
+        sizeElement.classList.add("sub-element");
+        sizeElement.textContent = size.subArray;
+
+        sizeElement.addEventListener("click", () => handleSizeDetails(size));
+        companyContainer.appendChild(sizeElement);
     });
+}
 
-    function handleSize(application) {
-        container.style.display = "none";
+function handleSizeDetails(size) {
+    const companyContainer = document.getElementById("company-container");
+    companyContainer.innerHTML = "";
 
-        const companyContainer = document.getElementById("company-container");
-        companyContainer.innerHTML = "";
+    if (size.suggestedProduct ) {
+        const productElement = document.createElement("div");
+        productElement.classList.add("sub-element");
+        productElement.textContent = `Product: ${size.subArray}`;
+        companyContainer.appendChild(productElement);
+    }
 
-        application.subArray.forEach((size) => {
-            const sizeElement = document.createElement("div");
-            sizeElement.classList.add("sub-element");
-            sizeElement.textContent = size.name;
+    if (size.subArray || size.subArray ) {
+        const subElement = size.subArray || size.subArray
+        subElement.forEach((type) => {
+            const typeElement = document.createElement("div");
+            typeElement.classList.add("sub-element");
+            typeElement.textContent = `${type.type}`;
+            companyContainer.appendChild(typeElement);
+            typeElement.addEventListener("click", () => handleSizeProduct(type));
 
-            sizeElement.addEventListener("click", () => handleSizeDetails(size));
-            companyContainer.appendChild(sizeElement);
         });
     }
-
-    function handleSizeDetails(size) {
-        const companyContainer = document.getElementById("company-container");
-        companyContainer.innerHTML = "";
-
-        if (size.suggestedProduct) {
-            const productElement = document.createElement("div");
-            productElement.classList.add("sub-element");
-            productElement.textContent = `Product: ${size.suggestedProduct}`;
-            companyContainer.appendChild(productElement);
-        }
-
-        // Check for subArray
-        if (size.subArray) {
-            size.subArray.forEach((subArray) => {
-                const subArrayElement = document.createElement("div");
-                subArrayElement.classList.add("sub-element");
-                subArrayElement.textContent = `${subArray.subArray}`;
-                companyContainer.appendChild(subArrayElement);
-                subArrayElement.addEventListener("click", () => handleSizeProduct(subArray));
-
-            });
-        }
-    }
-    function handleSizeProduct(product) {
-    const companyContainer = document.getElementById("company-container");
-    companyContainer.innerHTML = ""; 
-
-    const productElement = document.createElement("div");
-    productElement.classList.add("sub-element");
-    productElement.textContent = `Suggested Product: ${product.suggestedProduct}`;
-    companyContainer.appendChild(productElement);
 }
-    
+function handleSizeProduct(product) {
+const companyContainer = document.getElementById("company-container");
+companyContainer.innerHTML = ""; 
 
-console.log(Object.values(Application))
+const productElement = document.createElement("div");
+productElement.classList.add("sub-element");
+productElement.textContent = `Suggested Product: ${product.subArray}`;
+companyContainer.appendChild(productElement);
+}
+
+function createLayout(title){
+
+}
+console.log(Application)
+
 
     </script>
         
