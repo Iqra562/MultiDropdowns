@@ -23,6 +23,11 @@
         cursor: pointer;
         /* overflow-y: scroll; */
     }
+    .result-div{
+        padding: 10px 12px;
+        font-size: 18px;
+        margin-top: 8px;
+    }
     .container{
 display: flex;
 justify-content: center;
@@ -414,12 +419,13 @@ stiffness :[
                 console.log(value)
             } else {
                 if(key === "suggestedProduct"){
-                    const companyContainer = document.querySelector(".element-container");
-                    companyContainer.innerHTML = ""
+                    const subContainer = document.getElementsByClassName("sub-container")[0]
+
+                    subContainer.innerHTML = ""
                     const subElement = document.createElement("div");
-                    subElement.classList.add("sub-element");
+                    subElement.classList.add("result-div");
                     subElement.textContent = `${value}`;
-                    companyContainer.appendChild(subElement);
+                    subContainer.appendChild(subElement);
                 }
             }
         });
