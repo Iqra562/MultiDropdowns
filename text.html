@@ -8,28 +8,70 @@
 </head>
 
 <style>
-    #userInput {
-        width: 50%;
-        height: 40%;
-    }
-
+    
+  html{
+    font-family: sans-serif;
+  }
     .sub-element {
-        border: 1px solid black;
-        border-radius: 2px;
-        width: 50%;
-        background-color: #b38416;
+        border: 1px solid #41221bc2;
+        border-radius: 4px;
+        /* width: 100%; */
+        background-color: #e3b424;
         padding: 10px 12px;
         font-size: 18px;
         margin-top: 8px;
         cursor: pointer;
+        /* overflow-y: scroll; */
+    }
+    .container{
+display: flex;
+justify-content: center;
+padding-top: 8rem;
+/* background-color: rgba(150, 142, 142, 0.205); */
+
+        /* padding: 20px 20px 0 20px ; */
+    }
+   
+    input{
+        width:  -webkit-fill-available;
+        background: transparent;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid black;
+        padding-bottom: 6px;
+        font-size: 2rem;
+    }
+    input::placeholder{
+        color: #e3b424;
+    }
+    #element-container{
+        padding: 0 10px;
+        padding-bottom: 15px;
+        border-bottom: 2px dashed black;
+    }
+    .input-container{
+        /* width: 150%; */
+        padding: 0 10px;
     }
 </style>
 <body>
+   <div style="background-image: url('./images/homepage.web');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
 
-  <input type="text" id="userInput" value="">
-  <div id="container"></div>
-  <div id="company-container"></div>
+    <div class="container">
+<div style="width: 60%">
+    <div class="input-container">
 
+        <input type="text" class="userInput" value="" oninput="filter()" placeholder="Type or select an option">
+    </div>
+    <!-- <div id="container"></div> -->
+    <div id="element-container">
+
+    </div>
+</div>
+        
+    </div>
+   </div>
+  
   <script>
      const Application = [
         { 
@@ -297,12 +339,12 @@ stiffness :[
     ]
 
         },
-//         {
-//             name:"Fat Tire Cycling"
-//         },
-//         {
-//             name:"Ice Climbing"
-//         },
+        // {
+        //     name:"Fat Tire Cycling"
+        // },
+        // {
+        //     name:"Ice Climbing"
+        // },
 //         {
 //             name:"Inline Skating"
 //         },
@@ -328,21 +370,25 @@ stiffness :[
 ];
   
     const container = document.getElementById("container");
-
+    let input  = document.getElementsByClassName("userInput")
     Application.forEach((application) => {
+        const companyContainer = document.getElementById("element-container");
       
       const subElement = document.createElement("div");
       subElement.classList.add("sub-element");
       subElement.textContent = application.name;
 
         subElement.addEventListener("click", () => handleNested(application));
-        container.appendChild(subElement);
+        companyContainer.appendChild(subElement);
         console.log(application)
     });
 
     function handleNested(item ) {
-      container.style.display = "none";
-        const companyContainer = document.getElementById("company-container");
+    //   container.style.display = "none";
+    // console.log(item,"item")
+    input.value += "grf"
+    console.log(item.name || item.type || item.thickness ||  item.stiffness )
+        const companyContainer = document.getElementById("element-container");
         companyContainer.innerHTML = ""; 
 
         Object.entries(item).forEach(([key, value]) => {
@@ -352,6 +398,7 @@ stiffness :[
                 // subElement.textContent = `View ${key}`;
                 // subElement.addEventListener("click", () => renderArray(value, ));
                 // companyContainer.appendChild(subElement);
+                // console.log(value)
                 renderArray(value)
             } else if (typeof value === "object" && value !== null) {
                 // const subElement = document.createElement("div");
@@ -361,27 +408,44 @@ stiffness :[
                 // subElement.addEventListener("click", () => renderArray(value, ));
                 // companyContainer.appendChild(subElement);
                 renderArray(value)
+                console.log(value)
             } else {
-                const subElement = document.createElement("div");
-                subElement.classList.add("sub-element");
-                subElement.textContent = `${key}: ${value},finalll`;
-                companyContainer.appendChild(subElement);
+                if(key === "suggestedProduct"){
+
+                    const subElement = document.createElement("div");
+                    subElement.classList.add("sub-element");
+                    subElement.textContent = `${value}`;
+                    companyContainer.appendChild(subElement);
+                }
             }
         });
     }
 
     function renderArray(array  ){     
-        const companyContainer = document.getElementById("company-container");
-        companyContainer.innerHTML = "";
+        const companyContainer = document.getElementById("element-container");
+        companyContainer.innerHTML += "";
 
         array.forEach((item) => {
             const subElement = document.createElement("div");
             subElement.classList.add("sub-element");
             subElement.textContent = item.name || item.type || item.thickness ||  item.stiffness || "View Details";
-            subElement.addEventListener("click", () => handleNested(item, ));
+            subElement.addEventListener("click", () => handleNested(item));
+            
             companyContainer.appendChild(subElement);
         });
     }
+    function filter(){
+         const userValue = document.getElementsByClassName("userInput").value;
+         const items=  document.querySelectorAll(".sub-element");
+         items.forEach((item)=>{
+            const singleLiText = item.innerText.toLowerCase();
+           if(singleLiText.indexOf(userValue) === -1){
+               console.log("no matchde value")
+        }else{
+            console.log(item)
+           }
+    })
+    } 
     console.log(Application)
   </script>
 </body>
