@@ -392,15 +392,17 @@ stiffness :[
     
     Object.entries(item).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-                input.value =item.name || item.type || item.thickness ||  item.stiffness
-                input.value = ""
+                // input.value =item.name || item.type || item.thickness ||  item.stiffness
+                // input.value = ""
                 // const subElement = document.createElement("div");
                 // subElement.classList.add("sub-element");
                 // subElement.textContent = `View ${key}`;
                 // subElement.addEventListener("click", () => renderArray(value, ));
                 // companyContainer.appendChild(subElement);
                 // console.log(value)
+
                 renderArray(value)
+                //   document.querySelector(".userInput").value = item.name || item.sizes || item.type || item.thickness ||  item.stiffness
             } else if (typeof value === "object" && value !== null) {
                 // const subElement = document.createElement("div");
                 // subElement.classList.add("sub-element");
@@ -413,6 +415,7 @@ stiffness :[
             } else {
                 if(key === "suggestedProduct"){
                     const companyContainer = document.querySelector(".element-container");
+                    companyContainer.innerHTML = ""
                     const subElement = document.createElement("div");
                     subElement.classList.add("sub-element");
                     subElement.textContent = `${value}`;
@@ -424,13 +427,10 @@ stiffness :[
 
     function renderArray(array  ){   
 
-        const subContainer = document.getElementsByClassName("sub-container")[0]; // Get the first sub-container element
+        const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
     const companyContainer = document.querySelector(".element-container");
     
-    // Clear the company container before adding new content
-    // companyContainer.innerHTML = ""; 
-
-    // Create the input container and add the input element
+   
     const inputContainer = document.createElement("div");
     const elementContainer = document.createElement("div");
     elementContainer.classList.add("element-container");
@@ -444,21 +444,22 @@ stiffness :[
     inputElement.addEventListener("input", filter);
 
     inputContainer.appendChild(inputElement);
-    subContainer.appendChild(inputContainer); // Add the input container to the sub-container
-    subContainer.appendChild(elementContainer); // Add the input container to the sub-container
+    subContainer.appendChild(inputContainer); 
+    subContainer.appendChild(elementContainer); 
 
-    // Create and append sub-elements from the array
     array.forEach((item) => {
-        // const companyContainer = document.querySelector(".element-container");
 
         const subElement = document.createElement("div");
         subElement.classList.add("sub-element");
-        // subElement.id.add("element-container")
         subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
         
-        // Add click event to populate the input with the item's details
-        subElement.addEventListener("click", () => handleNested(item));
-           elementContainer.appendChild(subElement); // Append each sub-element to the company container
+        subElement.addEventListener("click", () => {
+            inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";  
+            handleNested(item);  
+        });
+
+         
+           elementContainer.appendChild(subElement); 
     });
     }
     function filter(){
