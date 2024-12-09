@@ -58,12 +58,11 @@ padding-top: 8rem;
    <div style="background-image: url('./images/homepage.web');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
 
     <div class="container">
-<div style="width: 60%">
+<div style="width: 60%" class="sub-container">
     <div class="input-container">
 
         <input type="text" class="userInput" value="" oninput="filter()" placeholder="Type or select an option">
     </div>
-    <!-- <div id="container"></div> -->
     <div id="element-container">
 
     </div>
@@ -370,7 +369,7 @@ stiffness :[
 ];
   
     const container = document.getElementById("container");
-    let input  = document.getElementsByClassName("userInput")
+    let input  = document.querySelector(".userInput")
     Application.forEach((application) => {
         const companyContainer = document.getElementById("element-container");
       
@@ -381,18 +380,21 @@ stiffness :[
         subElement.addEventListener("click", () => handleNested(application));
         companyContainer.appendChild(subElement);
         console.log(application)
+        input.value = application.name;
+        input.value = ""
     });
 
     function handleNested(item ) {
     //   container.style.display = "none";
-    // console.log(item,"item")
-    input.value += "grf"
-    console.log(item.name || item.type || item.thickness ||  item.stiffness )
-        const companyContainer = document.getElementById("element-container");
-        companyContainer.innerHTML = ""; 
-
-        Object.entries(item).forEach(([key, value]) => {
-            if (Array.isArray(value)) {
+    // console.log(input)
+    // console.log(item.name || item.type || item.thickness ||  item.stiffness )
+    const companyContainer = document.getElementById("element-container");
+    companyContainer.innerHTML = ""; 
+    
+    Object.entries(item).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+                input.value =item.name || item.type || item.thickness ||  item.stiffness
+                input.value = ""
                 // const subElement = document.createElement("div");
                 // subElement.classList.add("sub-element");
                 // subElement.textContent = `View ${key}`;
@@ -422,17 +424,36 @@ stiffness :[
     }
 
     function renderArray(array  ){     
-        const companyContainer = document.getElementById("element-container");
-        companyContainer.innerHTML += "";
+        const subContainer = document.getElementsByClassName("sub-container")[0]; // Get the first sub-container element
+    const companyContainer = document.getElementById("element-container");
+    
+    // Clear the company container before adding new content
+    // companyContainer.innerHTML = ""; 
 
-        array.forEach((item) => {
-            const subElement = document.createElement("div");
-            subElement.classList.add("sub-element");
-            subElement.textContent = item.name || item.type || item.thickness ||  item.stiffness || "View Details";
-            subElement.addEventListener("click", () => handleNested(item));
-            
-            companyContainer.appendChild(subElement);
-        });
+    // Create the input container and add the input element
+    const inputContainer = document.createElement("div");
+    inputContainer.classList.add("input-container");
+
+    const inputElement = document.createElement("input");
+    inputElement.type = "text";
+    inputElement.classList.add("userInput");
+    inputElement.value = "";
+    inputElement.placeholder = "Type or select an option";
+    inputElement.addEventListener("input", filter);
+
+    inputContainer.appendChild(inputElement);
+    subContainer.appendChild(inputContainer); // Add the input container to the sub-container
+
+    // Create and append sub-elements from the array
+    array.forEach((item) => {
+        const subElement = document.createElement("div");
+        subElement.classList.add("sub-element");
+        subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
+        
+        // Add click event to populate the input with the item's details
+        subElement.addEventListener("click", () => handleNested(item));
+        subContainer.appendChild(subElement); // Append each sub-element to the company container
+    });
     }
     function filter(){
          const userValue = document.getElementsByClassName("userInput").value;
