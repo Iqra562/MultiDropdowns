@@ -106,13 +106,13 @@ padding-top: 8rem;
 
 .translate-up {
   transform: translateY(-100%);
-  opacity: 0;
+  /* opacity: 0; */
 }
 
-.transition-container:not(.translate-in):not(.translate-up) {
+/* .transition-container:not(.translate-in):not(.translate-up) {
   transform: translateY(0);
   opacity: 1;
-}
+} */
 
 </style>
 <body>
@@ -445,6 +445,9 @@ stiffness :[
         subElement.addEventListener("click", () =>{
             input.value = application.name
             handleNested(application)
+            const currentComponent = document.querySelector(".transition-container");
+            currentComponent.classList.add("translate-up");
+
         } );
         companyContainer.appendChild(subElement);
         console.log(application)
@@ -489,56 +492,57 @@ stiffness :[
         });
     }
 
-    function renderArray(array  ){   
+        function renderArray(array  ){   
 
-        const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
-        const transitionContainer = document.createElement("div");
-        transitionContainer.classList.add("transition-container", "translate-in");
+            const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
+            const transitionContainer = document.createElement("div");
+            transitionContainer.classList.add("transition-container", "translate-in");
 
 
-    const inputContainer = document.createElement("div");
-    const elementContainer = document.createElement("div");
-    elementContainer.classList.add("element-container");
-    inputContainer.classList.add("input-container");
+        const inputContainer = document.createElement("div");
+        const elementContainer = document.createElement("div");
+        elementContainer.classList.add("element-container");
+        inputContainer.classList.add("input-container");
 
-    const inputElement = document.createElement("input");
-    inputElement.type = "text";
-    inputElement.classList.add("userInput");
-    inputElement.value = "";
-    inputElement.placeholder = "Type or select an option";
-    inputElement.addEventListener("input", filter);
+        const inputElement = document.createElement("input");
+        inputElement.type = "text";
+        inputElement.classList.add("userInput");
+        inputElement.value = "";
+        inputElement.placeholder = "Type or select an option";
+        inputElement.addEventListener("input", filter);
 
-    inputContainer.appendChild(inputElement);
-    transitionContainer.appendChild(inputContainer); 
-    transitionContainer.appendChild(elementContainer); 
-     subContainer.appendChild(transitionContainer)
-    array.forEach((item) => {
+        inputContainer.appendChild(inputElement);
+        transitionContainer.appendChild(inputContainer); 
+        transitionContainer.appendChild(elementContainer); 
+        subContainer.appendChild(transitionContainer)
+        array.forEach((item) => {
 
-        const subElement = document.createElement("div");
-        subElement.classList.add("sub-element");
-        subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
-        
-        subElement.addEventListener("click", () => {
-            inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";  
-            handleNested(item);  
+            const subElement = document.createElement("div");
+            subElement.classList.add("sub-element");
+            subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
+            
+            subElement.addEventListener("click", () => {
+                const currentComponent = document.querySelector(".transition-container");
+                currentComponent.classList.add("translate-up");
+                inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";  
+                handleNested(item);  
+                
+      currentComponent.classList.remove("translate-in");
+
+      currentComponent.addEventListener("transitionend", () => {
+        currentComponent.remove();
+      });
+
+            });
+
+            
+            elementContainer.appendChild(subElement); 
+
         });
+    setTimeout(() => {
+        transitionContainer.classList.remove("translate-in");
+    }, 10);
 
-         
-           elementContainer.appendChild(subElement); 
-
-    });
-  setTimeout(() => {
-    transitionContainer.classList.remove("translate-in");
-  }, 10);
-
-  // Remove   current component
-  const currentComponent = document.querySelector(".transition-container.translate-up");
-  if (currentComponent) {
-    currentComponent.addEventListener("transitionend", () => {
-      currentComponent.remove();
-    });
-    currentComponent.classList.add("translate-up");
-  }
     }
 
 
