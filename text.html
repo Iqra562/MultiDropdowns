@@ -377,12 +377,16 @@ stiffness :[
     let input  = document.querySelector(".userInput")
     Application.forEach((application) => {
         const companyContainer = document.querySelector(".element-container");
+        const input = document.querySelector(".userInput");
       
       const subElement = document.createElement("div");
       subElement.classList.add("sub-element");
       subElement.textContent = application.name;
 
-        subElement.addEventListener("click", () => handleNested(application));
+        subElement.addEventListener("click", () =>{
+            input.value = application.name
+            handleNested(application)
+        } );
         companyContainer.appendChild(subElement);
         console.log(application)
    
