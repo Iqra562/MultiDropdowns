@@ -466,8 +466,8 @@
         // const container = document.getElementById("container");
         // let input = document.querySelector(".userInput")
         let storeUserValues= [];
-        const heading ="";
-        const description = ""
+        let heading ="";
+        let description = ""
 
         Application.forEach((application) => {
             const companyContainer = document.querySelector(".element-container");
@@ -479,7 +479,7 @@
             subElement.textContent = application.name;
 
             subElement.addEventListener("click", () => {
-                setItems(application.name)
+                setItems(application.name,application)
                 input.value = application.name
                 const currentComponent = document.querySelector(".transition-container");
                 setTimeout(() => {
@@ -507,7 +507,7 @@
                 } else if (typeof value === "object" && value !== null) {
 
                     renderArray(value)
-                    console.log(value)
+                    // console.log(value)
                 } else {
                     if (key === "suggestedProduct") {
                         const subContainer = document.getElementsByClassName("sub-container")[0]
@@ -529,7 +529,7 @@
             const userValuesContent =
         storeUserValues.length > 0
             ? storeUserValues.map((value) => `${value}`).join("-")
-            : "<p>No values selected</p>";
+            : "<p></p>";
 
             transitionContainer.innerHTML = `
               <div class="heading-container">
@@ -537,14 +537,14 @@
                         <div>
                             <div class="dynamic-heading-container">
 
-                                <p>Application</p>( <div>
+                                <p>${heading}</p>( <div>
                                     <p>
                                         ${userValuesContent}
                                         </p>
                                 </div> )*
                             </div>
                             <div>
-                                <p class="description">How do you plan to use these liners? </p>
+                                <p class="description">${description} </p>
                             </div>
                         </div>
                     </div>
@@ -578,7 +578,8 @@
                 subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
 
                 subElement.addEventListener("click", () => {
-                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details")
+                    // console.log(item,"items")
+                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details",item)
                     inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";
                     setTimeout(() => {
 
@@ -613,22 +614,31 @@
 
             if (totalHeight > getHeightContainer.offsetHeight) {
                 getHeightContainer.style.overflowY = 'scroll';
-                console.log("scroll applied");
+                // console.log("scroll applied");
             } else {
                 getHeightContainer.style.overflowY = 'hidden';
-                console.log("hidden applied");
+                // console.log("hidden applied");
             }
         }
 
-        function setItems(key) {
-    console.log(key, "key");
+        function setItems(value,item) {
+    // console.log(key, "key");
 
     // Add the key to the stored user values
-    if (!storeUserValues.includes(key)) {
-        storeUserValues.push(key);
+    if (!storeUserValues.includes(value)) {
+        storeUserValues.push(value);
+    }
+    if(item.sizes){
+        heading = "select sizes "
+        description = "select your leg  sizes "
+    }else if(item.thickness){
+        heading = "thickness"
+        description = "set thickness "
+    }else{
+        return
     }
 
-    console.log(storeUserValues, "Stored User Values");
+    // console.log(storeUserValues, "Stored User Values");
 }
         function filter() {
             const userValue = document.getElementsByClassName("userInput").value;
@@ -636,9 +646,9 @@
             items.forEach((item) => {
                 const singleLiText = item.innerText.toLowerCase();
                 if (singleLiText.indexOf(userValue) === -1) {
-                    console.log("no matchde value")
+                    // console.log("no matchde value")
                 } else {
-                    console.log(item)
+                    // console.log(item)
                 }
             })
         }
