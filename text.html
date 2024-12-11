@@ -454,11 +454,102 @@
 
             },
             {
-                name: "Fat Tire Cycling"
+                name: "Downhill Snowboarding",
+                sizes: [
+                    {
+                        name: "Extra Slim",
+                        stiffness: [
+                            {
+                                type: "Extra Stiff",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 12MM" },
+                                    { thickness: "2 fingers or more - 15mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 15MM" }
+                                ]
+                            },
+                            {
+                                type: "Medium",
+                                suggestedProduct: "TOUR WRAP DUAL DENSITY 9MM"
+                            }
+                        ]
+                    },
+
+
+                    {
+                        name: "Average",
+                        stiffness: [
+                            {
+                                type: "Extra Soft",
+                                suggestedProduct: "WINTER BOOT LOW DENSITY 12MM"
+                            },
+                            {
+                                type: "Soft",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "TOUR TONGUE DUAL DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "TOUR TONGUE DUAL DENSITY 12MM" },
+                                    { thickness: "2 fingers or more - 15mm", suggestedProduct: "TOUR TONGUE DUAL DENSITY 15MM" },
+
+                                ]
+
+                            },
+                            {
+                                type: "Medium",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "DOWNHILL TONGUE DUAL DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "DOWNHILL TONGUE DUAL DENSITY 12MM" },
+                                    { thickness: "2 fingers or more - 15mm", suggestedProduct: "DOWNHILL TONGUE DUAL DENSITY 15MM" },
+
+                                ]
+                            },
+                            {
+                                type: "Stiff",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "DOWNHILL TONGUE HIGH DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "DOWNHILL TONGUE HIGH DENSITY 12MM" },
+
+                                ]
+                            },
+                            {
+                                type: "Extra Stiff",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 12MM" },
+                                    { thickness: "2 fingers or more - 15mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 15MM" },
+
+                                ]
+                            }
+                        ]
+                    },
+                    {
+
+                        name: "Extra large",
+                        stiffness: [
+                            {
+                                type: "Medium",
+                                suggestedProduct: "TOUR WRAP DUAL DENSITY 9MM"
+                            },
+                            {
+                                type: "Extra Stiff",
+                                thickness: [
+                                    { thickness: "1 finger or less - 9mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 9MM" },
+                                    { thickness: "1-2 fingers - 12mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 12MM" },
+                                    { thickness: "2 fingers or more - 15mm", suggestedProduct: "DOWNHILL WRAP HIGH DENSITY 15xMM" },
+                                ]
+                            },
+
+
+
+                        ]
+                    }
+                ]
+
             },
-            {
-                name: "Ice Climbing"
-            },
+            // {
+            //     name: "Fat Tire Cycling"
+            // },
+            // {
+            //     name: "Ice Climbing"
+            // },
             //         {
             //             name:"Inline Skating"
             //         },
@@ -610,6 +701,7 @@
                             handleNested(item);
                         })
                         isProcessing = false;
+                        submitButton.style.display="block"
                         return;
                     }
                     setTimeout(() => {
@@ -685,7 +777,7 @@ document.addEventListener('click', (event) => {
         if (!input.contains(event.target) && !elementContainer.contains(event.target)) {
             elementContainer.classList.remove('visible');    
             elementContainer.classList.add('hidden');
-            submitBtn.style.display = "block"
+            // submitBtn.style.display = "block"
     }
     // setTimeout(()=>{
     //     elementContainer.style.display="none"
@@ -708,16 +800,16 @@ input.addEventListener("input", () => {
     checkOverflow()
 });
 
-        // function filter() {
-        //     const userValue = document.querySelector(".userInput").value;
-        //     console.log(userValue)
-        //     const items = document.querySelectorAll(".sub-element");
-        //     items.forEach((item) => {
-        //         const singleLiText = item.innerText.toLowerCase();
-        //         if (singleLiText.indexOf(userValue) === -1) {
-        //         }
-        //     })
-        // }
+        function filter() {
+            const userValue = document.querySelector(".userInput").value;
+            console.log(userValue)
+            const items = document.querySelectorAll(".sub-element");
+            items.forEach((item) => {
+                const singleLiText = item.innerText.toLowerCase();
+                if (singleLiText.indexOf(userValue) === -1) {
+                }
+            })
+        }
        
        
         console.log(Application)
