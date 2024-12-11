@@ -577,24 +577,24 @@
             transitionContainer.appendChild(submitButton);
             subContainer.appendChild(transitionContainer)
             array.forEach((item, index) => {
-                 
+                 const valuesInItem = item.name || item.type || item.thickness || item.stiffness || "View Details";
                 const subElement = document.createElement("div");
                 subElement.classList.add("sub-element");
-                subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
+                subElement.textContent = valuesInItem
 
                 subElement.addEventListener("click", () => {
                     if(isProcessing) return;
                     isProcessing =true
                     
-                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details", item)
-                    inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";
+                    setItems(valuesInItem, item)
+                    inputElement.value =valuesInItem;
 
                     if (item.suggestedProduct) {
                         submitButton.innerText = "Submit"
                         submitButton.addEventListener("click", () => {
                             handleNested(item);
                         })
-                        isProcessing = false
+                        isProcessing = false;
                         return;
                     }
                     setTimeout(() => {
