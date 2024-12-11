@@ -53,12 +53,17 @@
         padding: 10px 12px;
         font-size: 18px;
         margin-top: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 
     .container {
         display: flex;
         justify-content: center;
         padding-top: 2rem;
+        height: 100%;
 
     }
 
@@ -465,9 +470,10 @@
 
         // const container = document.getElementById("container");
         // let input = document.querySelector(".userInput")
-        let storeUserValues= [];
-        let heading ="";
+        let storeUserValues = [];
+        let heading = "";
         let description = ""
+        let isProcessing =false;
 
         Application.forEach((application) => {
             const companyContainer = document.querySelector(".element-container");
@@ -479,7 +485,9 @@
             subElement.textContent = application.name;
 
             subElement.addEventListener("click", () => {
-                setItems(application.name,application)
+                if(isProcessing) return;
+                isProcessing =true
+                setItems(application.name, application)
                 input.value = application.name
                 const currentComponent = document.querySelector(".transition-container");
                 setTimeout(() => {
@@ -487,13 +495,12 @@
                     currentComponent.innerHTML = ""
                     handleNested(application)
                     checkOverflow();
+               isProcessing = false
 
-
-                }, 200)
+                }, 800)
 
             });
             companyContainer.appendChild(subElement);
-            console.log(application)
 
         });
 
@@ -501,21 +508,19 @@
 
             Object.entries(item).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
-                  
                     renderArray(value)
-
                 } else if (typeof value === "object" && value !== null) {
-
                     renderArray(value)
-                    // console.log(value)
                 } else {
                     if (key === "suggestedProduct") {
                         const subContainer = document.getElementsByClassName("sub-container")[0]
 
                         subContainer.innerHTML = ""
                         const subElement = document.createElement("div");
+                        const paragraph = document.createElement("div");
                         subElement.classList.add("result-div");
-                        subElement.textContent = `${value}`;
+                        paragraph.textContent = `${value}`;
+                        subElement.appendChild(paragraph)
                         subContainer.appendChild(subElement);
                     }
                 }
@@ -524,12 +529,12 @@
 
         function renderArray(array) {
 
-            const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
+            const subContainer = document.getElementsByClassName("sub-container")[0]; 
             const transitionContainer = document.createElement("div");
             const userValuesContent =
-        storeUserValues.length > 0
-            ? storeUserValues.map((value) => `${value}`).join("-")
-            : "<p></p>";
+                storeUserValues.length > 0
+                    ? storeUserValues.map((value) => `${value}`).join("-")
+                    : "<p></p>";
 
             transitionContainer.innerHTML = `
               <div class="heading-container">
@@ -549,7 +554,7 @@
                         </div>
                     </div>
             `
-       
+
             const inputContainer = document.createElement("div");
             const elementContainer = document.createElement("div");
             elementContainer.classList.add("element-container");
@@ -571,24 +576,34 @@
             transitionContainer.appendChild(elementContainer);
             transitionContainer.appendChild(submitButton);
             subContainer.appendChild(transitionContainer)
-            array.forEach((item) => {
-
+            array.forEach((item, index) => {
+                 
                 const subElement = document.createElement("div");
                 subElement.classList.add("sub-element");
                 subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
 
                 subElement.addEventListener("click", () => {
-                    // console.log(item,"items")
-                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details",item)
+                    if(isProcessing) return;
+                    isProcessing =true
+                    
+                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details", item)
                     inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";
+
+                    if (item.suggestedProduct) {
+                        submitButton.innerText = "Submit"
+                        submitButton.addEventListener("click", () => {
+                            handleNested(item);
+                        })
+                        isProcessing = false
+                        return;
+                    }
                     setTimeout(() => {
-
                         transitionContainer.innerHTML = ""
-
                         handleNested(item);
-
                         checkOverflow();
+                        isProcessing = false
                     }, 800);
+
 
 
 
@@ -601,7 +616,7 @@
 
 
         }
- 
+
 
         function checkOverflow() {
             const getHeightContainer = document.querySelector('.element-container');
@@ -614,41 +629,33 @@
 
             if (totalHeight > getHeightContainer.offsetHeight) {
                 getHeightContainer.style.overflowY = 'scroll';
-                // console.log("scroll applied");
             } else {
                 getHeightContainer.style.overflowY = 'hidden';
-                // console.log("hidden applied");
             }
         }
 
-        function setItems(value,item) {
-    // console.log(key, "key");
+        function setItems(value, item) {
 
-    // Add the key to the stored user values
-    if (!storeUserValues.includes(value)) {
-        storeUserValues.push(value);
-    }
-    if(item.sizes){
-        heading = "select sizes "
-        description = "select your leg  sizes "
-    }else if(item.thickness){
-        heading = "thickness"
-        description = "set thickness "
-    }else{
-        return
-    }
+            if (!storeUserValues.includes(value)) {
+                storeUserValues.push(value);
+            }
+            if (item.sizes) {
+                heading = "select sizes "
+                description = "select your leg  sizes "
+            } else if (item.thickness) {
+                heading = "thickness"
+                description = "set thickness "
+            } else {
+                return
+            }
 
-    // console.log(storeUserValues, "Stored User Values");
-}
+        }
         function filter() {
             const userValue = document.getElementsByClassName("userInput").value;
             const items = document.querySelectorAll(".sub-element");
             items.forEach((item) => {
                 const singleLiText = item.innerText.toLowerCase();
                 if (singleLiText.indexOf(userValue) === -1) {
-                    // console.log("no matchde value")
-                } else {
-                    // console.log(item)
                 }
             })
         }
