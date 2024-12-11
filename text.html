@@ -20,9 +20,9 @@
 
     .dynamic-heading-container {
         display: flex;
-        /* flex-direction: column; */
         align-items: center;
-        /* justify-content: center; */
+        font-size: 20px;
+        text-transform:capitalize ;
     }
 
     .sub-container {
@@ -85,6 +85,8 @@
         padding-bottom: 15px;
         border-bottom: 2px dashed black;
         max-height: 12rem;
+        transform: translateY(-10%);
+        transition: transform 2s ease ;
         /* overflow-y: scroll; */
     }
 
@@ -108,16 +110,9 @@
         transition: transform 0.5s ease-in-out;
     }
 
-    .translate-up {
-        transform: translateY(-100%);
-        /* display: none; */
-    }
-
-    .translate-in {
-        /* transform: translateY(100%);   */
-    }
 
     .submit-btn {
+        /* display: block; */
         margin-top: 8px;
         background-color: black;
         padding: 8px 18px;
@@ -129,8 +124,29 @@
     }
 
     .heading {
-        margin-right: 29px;
+        margin-right: 10px;
+        font-size: 20px;
+        
     }
+    .description{
+        padding: 0;
+        line-height: 0;
+        color: gray;
+    }
+    .hidden {
+    opacity: 0;
+    display: none;
+    transform: translateY(-20px); 
+    pointer-events: none;  
+    transition: all 0.3s ease-in-out;  
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0); 
+    pointer-events: auto;  
+}
+
 </style>
 
 <body>
@@ -145,9 +161,8 @@
                         <div>
                             <div class="dynamic-heading-container">
 
-                                <p>Application</p>( <div>
-                                    <p>Downhill Snowboarding-ExtraLarge</p>
-                                </div> )*
+                                <p>Application</p>
+                                <!-- ( <div><p>Downhill Snowboarding-ExtraLarge</p></div> )* -->
                             </div>
                             <div>
                                 <p class="description">How do you plan to use these liners? </p>
@@ -156,13 +171,13 @@
                     </div>
                     <div class="input-container">
 
-                        <input type="text" class="userInput" value="" oninput="filter()"
-                            placeholder="Type or select an option">
+                        <input type="text" class="userInput " value="" oninput="filter()"
+                            placeholder="Type or select an option"  onclick="showElementContainer()">
                     </div>
-                    <div class="element-container">
+                    <div class="element-container hidden">
 
                     </div>
-                    <button class="submit-btn">
+                    <button class="submit-btn" id="">
                         ok
                     </button>
                 </div>
@@ -557,7 +572,7 @@
 
             const inputContainer = document.createElement("div");
             const elementContainer = document.createElement("div");
-            elementContainer.classList.add("element-container");
+            elementContainer.classList.add("element-container","hidden");
             inputContainer.classList.add("input-container");
 
             const inputElement = document.createElement("input");
@@ -566,7 +581,7 @@
             inputElement.value = "";
             inputElement.placeholder = "Type or select an option";
             inputElement.addEventListener("input", filter);
-
+            inputElement.addEventListener("click",showElementContainer)
             const submitButton = document.createElement("button");
             submitButton.classList.add("submit-btn");
             submitButton.textContent = "OK";
@@ -641,17 +656,46 @@
             }
             if (item.sizes) {
                 heading = "select sizes "
-                description = "select your leg  sizes "
+                description = "select your   sizes "
             } else if (item.thickness) {
                 heading = "thickness"
-                description = "set thickness "
+                description = "select number "
             } else {
                 return
             }
 
         }
+
+        function showElementContainer() {
+    const elementContainer = document.querySelector('.element-container');
+    let submitBtn = document.querySelector('.submit-btn');
+    submitBtn.style.display = "none"
+    if (elementContainer) {
+        elementContainer.classList.remove('hidden');
+        elementContainer.classList.add('visible');
+    }
+
+}
+
+document.addEventListener('click', (event) => {
+        const submitBtn = document.querySelector('.submit-btn');
+        
+        const input = document.querySelector('.userInput');
+        const elementContainer = document.querySelector('.element-container');
+        if (!input.contains(event.target) && !elementContainer.contains(event.target)) {
+            elementContainer.classList.remove('visible');    
+            elementContainer.classList.add('hidden');
+            submitBtn.style.display = "block"
+    }
+    // setTimeout(()=>{
+    //     elementContainer.style.display="none"
+    // },2000)
+});
+
+
         function filter() {
-            const userValue = document.getElementsByClassName("userInput").value;
+            const userValue = document.querySelector(".userInput").value;
+            console.log(userValue)
             const items = document.querySelectorAll(".sub-element");
             items.forEach((item) => {
                 const singleLiText = item.innerText.toLowerCase();
