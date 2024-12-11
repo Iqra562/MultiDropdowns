@@ -692,17 +692,34 @@ document.addEventListener('click', (event) => {
     // },2000)
 });
 
+const input = document.querySelector(".userInput");
+input.addEventListener("input", () => {
+    const filterText = input.value.toLowerCase();
+    const subElements = document.querySelectorAll(".sub-element");
 
-        function filter() {
-            const userValue = document.querySelector(".userInput").value;
-            console.log(userValue)
-            const items = document.querySelectorAll(".sub-element");
-            items.forEach((item) => {
-                const singleLiText = item.innerText.toLowerCase();
-                if (singleLiText.indexOf(userValue) === -1) {
-                }
-            })
+    subElements.forEach((subElement) => {
+        const text = subElement.textContent.toLowerCase();
+        if (text.includes(filterText)) {
+            subElement.style.display = "block"; 
+        } else {
+            subElement.style.display = "none"; 
         }
+    });
+    checkOverflow()
+});
+
+        // function filter() {
+        //     const userValue = document.querySelector(".userInput").value;
+        //     console.log(userValue)
+        //     const items = document.querySelectorAll(".sub-element");
+        //     items.forEach((item) => {
+        //         const singleLiText = item.innerText.toLowerCase();
+        //         if (singleLiText.indexOf(userValue) === -1) {
+        //         }
+        //     })
+        // }
+       
+       
         console.log(Application)
 
     </script>
