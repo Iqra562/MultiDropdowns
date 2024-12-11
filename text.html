@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <style>
     html {
         font-family: sans-serif;
+    }
+
+    .heading-container {
+        display: flex;
+    }
+
+    .dynamic-heading-container {
+        display: flex;
+        /* flex-direction: column; */
+        align-items: center;
+        /* justify-content: center; */
     }
 
     .sub-container {
@@ -25,7 +37,7 @@
         border: 1px solid #41221bc2;
         border-radius: 4px;
         /* width: 100%; */
-        background-color: #e3b424;
+        background-color: #b38416;
         padding: 10px 12px;
         font-size: 18px;
         margin-top: 4px;
@@ -34,7 +46,7 @@
     }
 
     .sub-element:hover {
-        background-color: #b48e1b;
+        background-color: #977819;
     }
 
     .result-div {
@@ -46,7 +58,7 @@
     .container {
         display: flex;
         justify-content: center;
-        padding-top: 8rem;
+        padding-top: 2rem;
 
     }
 
@@ -61,7 +73,7 @@
     }
 
     input::placeholder {
-        color: #e3b424;
+        color: #b38416;
     }
 
     .element-container {
@@ -99,16 +111,44 @@
     .translate-in {
         /* transform: translateY(100%);   */
     }
+
+    .submit-btn {
+        margin-top: 8px;
+        background-color: black;
+        padding: 8px 18px;
+        outline: none;
+        border: none;
+        color: white;
+        font-size: 22px;
+        border-radius: 4px;
+    }
+
+    .heading {
+        margin-right: 29px;
+    }
 </style>
 
 <body>
     <div
-        style="background-image: url('./images/homepage.web');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
+        style="background-image: url('./images/homepage.webp');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
 
         <div class="container">
             <div style="width: 60%" class="sub-container">
                 <div class="transition-container">
+                    <div class="heading-container">
+                        <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
+                        <div>
+                            <div class="dynamic-heading-container">
 
+                                <p>Application</p>( <div>
+                                    <p>Downhill Snowboarding-ExtraLarge</p>
+                                </div> )*
+                            </div>
+                            <div>
+                                <p class="description">How do you plan to use these liners? </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-container">
 
                         <input type="text" class="userInput" value="" oninput="filter()"
@@ -117,6 +157,9 @@
                     <div class="element-container">
 
                     </div>
+                    <button class="submit-btn">
+                        ok
+                    </button>
                 </div>
             </div>
 
@@ -426,7 +469,7 @@
             const companyContainer = document.querySelector(".element-container");
             companyContainer.style.overflowY = 'scroll';
             const input = document.querySelector(".userInput");
-           
+
             const subElement = document.createElement("div");
             subElement.classList.add("sub-element");
             subElement.textContent = application.name;
@@ -477,9 +520,24 @@
 
             const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
             const transitionContainer = document.createElement("div");
-            transitionContainer.innerHTML = ""
-            // transitionContainer.classList.add("transition-container");
+            transitionContainer.innerHTML = `
+              <div class="heading-container">
+                        <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
+                        <div>
+                            <div class="dynamic-heading-container">
 
+                                <p>Application</p>( <div>
+                                    <p>Downhill Snowboarding-ExtraLarge</p>
+                                </div> )*
+                            </div>
+                            <div>
+                                <p class="description">How do you plan to use these liners? </p>
+                            </div>
+                        </div>
+                    </div>
+            `
+            // transitionContainer.classList.add("transition-container");
+            // transitionContainer.innerHTML = ""
             const inputContainer = document.createElement("div");
             const elementContainer = document.createElement("div");
             elementContainer.classList.add("element-container");
@@ -492,9 +550,14 @@
             inputElement.placeholder = "Type or select an option";
             inputElement.addEventListener("input", filter);
 
+            const submitButton = document.createElement("button");
+            submitButton.classList.add("submit-btn");
+            submitButton.textContent = "OK";
+
             inputContainer.appendChild(inputElement);
             transitionContainer.appendChild(inputContainer);
             transitionContainer.appendChild(elementContainer);
+            transitionContainer.appendChild(submitButton);
             subContainer.appendChild(transitionContainer)
             array.forEach((item) => {
 
@@ -503,16 +566,16 @@
                 subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
 
                 subElement.addEventListener("click", () => {
-                    
+
                     inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";
                     setTimeout(() => {
-                        
+
                         transitionContainer.innerHTML = ""
-                        
+
                         handleNested(item);
-                        
+
                         checkOverflow();
-                    }, 100);
+                    }, 800);
 
 
 
@@ -526,25 +589,25 @@
 
         }
 
-        
+
         function checkOverflow() {
-    const getHeightContainer = document.querySelector('.element-container');
-    if (!getHeightContainer) {
-        console.error("Element with class 'element-container' not found.");
-        return;
-    }
+            const getHeightContainer = document.querySelector('.element-container');
+            if (!getHeightContainer) {
+                console.error("Element with class 'element-container' not found.");
+                return;
+            }
 
-    const children = getHeightContainer.children;
-    const totalHeight = Array.from(children).reduce((acc, child) => acc + child.offsetHeight, 0);
+            const children = getHeightContainer.children;
+            const totalHeight = Array.from(children).reduce((acc, child) => acc + child.offsetHeight, 0);
 
-    if (totalHeight > getHeightContainer.offsetHeight) {
-        getHeightContainer.style.overflowY = 'scroll';
-        console.log("scroll applied");
-    } else {
-        getHeightContainer.style.overflowY = 'hidden';
-        console.log("hidden applied");
-    }
-}
+            if (totalHeight > getHeightContainer.offsetHeight) {
+                getHeightContainer.style.overflowY = 'scroll';
+                console.log("scroll applied");
+            } else {
+                getHeightContainer.style.overflowY = 'hidden';
+                console.log("hidden applied");
+            }
+        }
 
 
         function filter() {
