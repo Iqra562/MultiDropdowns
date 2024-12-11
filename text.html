@@ -463,8 +463,12 @@
 
         ];
 
-        const container = document.getElementById("container");
-        let input = document.querySelector(".userInput")
+        // const container = document.getElementById("container");
+        // let input = document.querySelector(".userInput")
+        let storeUserValues= [];
+        const heading ="";
+        const description = ""
+
         Application.forEach((application) => {
             const companyContainer = document.querySelector(".element-container");
             companyContainer.style.overflowY = 'scroll';
@@ -475,6 +479,7 @@
             subElement.textContent = application.name;
 
             subElement.addEventListener("click", () => {
+                setItems(application.name)
                 input.value = application.name
                 const currentComponent = document.querySelector(".transition-container");
                 setTimeout(() => {
@@ -496,6 +501,7 @@
 
             Object.entries(item).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
+                  
                     renderArray(value)
 
                 } else if (typeof value === "object" && value !== null) {
@@ -520,6 +526,11 @@
 
             const subContainer = document.getElementsByClassName("sub-container")[0]; //  first sub-container
             const transitionContainer = document.createElement("div");
+            const userValuesContent =
+        storeUserValues.length > 0
+            ? storeUserValues.map((value) => `${value}`).join("-")
+            : "<p>No values selected</p>";
+
             transitionContainer.innerHTML = `
               <div class="heading-container">
                         <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
@@ -527,7 +538,9 @@
                             <div class="dynamic-heading-container">
 
                                 <p>Application</p>( <div>
-                                    <p>Downhill Snowboarding-ExtraLarge</p>
+                                    <p>
+                                        ${userValuesContent}
+                                        </p>
                                 </div> )*
                             </div>
                             <div>
@@ -536,8 +549,7 @@
                         </div>
                     </div>
             `
-            // transitionContainer.classList.add("transition-container");
-            // transitionContainer.innerHTML = ""
+       
             const inputContainer = document.createElement("div");
             const elementContainer = document.createElement("div");
             elementContainer.classList.add("element-container");
@@ -566,7 +578,7 @@
                 subElement.textContent = item.name || item.type || item.thickness || item.stiffness || "View Details";
 
                 subElement.addEventListener("click", () => {
-
+                    setItems(item.name || item.type || item.thickness || item.stiffness || "View Details")
                     inputElement.value = item.name || item.type || item.thickness || item.stiffness || "";
                     setTimeout(() => {
 
@@ -588,12 +600,11 @@
 
 
         }
-
+ 
 
         function checkOverflow() {
             const getHeightContainer = document.querySelector('.element-container');
             if (!getHeightContainer) {
-                console.error("Element with class 'element-container' not found.");
                 return;
             }
 
@@ -609,7 +620,16 @@
             }
         }
 
+        function setItems(key) {
+    console.log(key, "key");
 
+    // Add the key to the stored user values
+    if (!storeUserValues.includes(key)) {
+        storeUserValues.push(key);
+    }
+
+    console.log(storeUserValues, "Stored User Values");
+}
         function filter() {
             const userValue = document.getElementsByClassName("userInput").value;
             const items = document.querySelectorAll(".sub-element");
