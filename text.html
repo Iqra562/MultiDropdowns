@@ -787,9 +787,11 @@ document.addEventListener('click', (event) => {
     // },2000)
 });
 
-const input = document.querySelector(".userInput");
-input.addEventListener("input", () => {
-    const filterText = input.value.toLowerCase();
+ 
+
+        function filter() {
+            const userValue = document.querySelector(".userInput");
+            const filterText = userValue.value.toLowerCase();
     const subElements = document.querySelectorAll(".sub-element");
 
     subElements.forEach((subElement) => {
@@ -801,16 +803,6 @@ input.addEventListener("input", () => {
         }
     });
     checkOverflow()
-});
-
-        function filter() {
-            const userValue = document.querySelector(".userInput").value;
-            const items = document.querySelectorAll(".sub-element");
-            items.forEach((item) => {
-                const singleLiText = item.innerText.toLowerCase();
-                if (singleLiText.indexOf(userValue) === -1) {
-                }
-            })
         }
        
        
