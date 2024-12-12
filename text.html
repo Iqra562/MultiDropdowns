@@ -16,8 +16,9 @@
      
     .heading-container {
         display: flex;
+        align-items: baseline;
     }
-
+    
     .dynamic-heading-container {
         display: flex;
         align-items: center;
@@ -28,13 +29,7 @@
         font-size: 22px;
     }
 
-    .sub-container {
-        /* background: red; */
-        /* padding: 10px; */
-        position: relative;
-        /* overflow-y: scroll; */
-        height: 30rem;
-    }
+   
 
     .sub-element {
         border: 1px solid #41221bc2;
@@ -98,9 +93,8 @@
     .sub-container {
         display: flex;
         flex-direction: column;
-        /* overflow: hidden; */
-        height: 100%;
-        width: 100%;
+        width: 60%;
+        /* height: 100%; */
     }
 
     .transition-container {
@@ -123,8 +117,10 @@
     }
 
     .heading {
-        margin-right: 10px;
+        /* margin-right: 10px; */
         font-size: 20px;
+        display: flex;
+    flex-wrap: nowrap;
         
     }
     .description{
@@ -151,6 +147,12 @@
 button{
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .sub-container {
+        width: 80% !important; 
+    }
+}
 </style>
 
 <body>
@@ -158,11 +160,11 @@ button{
         style="background-image: url('./images/homepage.webp');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
 <div class="" style="height: 100%;">
         <div class="container">
-            <div style="width: 60%" class="sub-container">
+            <div  class="sub-container">
                 <div class="transition-container">
                     <div class="heading-container">
                         <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
-                        <div>
+                        <div >
                             <div class="dynamic-heading-container">
 
                                 <p>Application</p>
@@ -778,10 +780,12 @@ sizes: [
             transitionContainer.innerHTML = `
               <div class="heading-container">
                         <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
-                        <div>
+                        <div >
                             <div class="dynamic-heading-container">
 
-                                <p>${heading}</p>( <div>
+                                <p>${heading}</p>
+                                
+                                ( <div>
                                     <p>
                                         ${userValuesContent}
                                         </p>
