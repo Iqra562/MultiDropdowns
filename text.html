@@ -13,7 +13,7 @@
     html {
         font-family: sans-serif;
     }
-
+     
     .heading-container {
         display: flex;
     }
@@ -24,12 +24,15 @@
         font-size: 20px;
         text-transform:capitalize ;
     }
+    .dynamic-heading-container p{
+        font-size: 22px;
+    }
 
     .sub-container {
         /* background: red; */
         /* padding: 10px; */
         position: relative;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
         height: 30rem;
     }
 
@@ -63,7 +66,8 @@
         display: flex;
         justify-content: center;
         padding-top: 2rem;
-        height: 100%;
+        height: -webkit-fill-available;
+        overflow-y: scroll;
 
     }
 
@@ -90,16 +94,11 @@
         /* overflow-y: scroll; */
     }
 
-    .sub-container {
-        position: relative;
-        /* overflow: hidden; */
-        /* height: 100%; */
-    }
-
+   
     .sub-container {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        /* overflow: hidden; */
         height: 100%;
         width: 100%;
     }
@@ -130,7 +129,8 @@
     }
     .description{
         padding: 0;
-        line-height: 22px;
+        font-size: 20px;
+        line-height: 25px;
         color: #c2c0c0b7;
         margin-top: 4px;
         margin-bottom: 40px;
@@ -156,7 +156,7 @@ button{
 <body>
     <div
         style="background-image: url('./images/homepage.webp');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
-
+<div class="" style="height: 100%;">
         <div class="container">
             <div style="width: 60%" class="sub-container">
                 <div class="transition-container">
@@ -188,6 +188,7 @@ button{
             </div>
 
         </div>
+    </div>
     </div>
 
     <script>
