@@ -130,8 +130,8 @@
     }
     .description{
         padding: 0;
-        line-height: 0;
-        color: gray;
+        line-height: 22px;
+        color: #c2c0c0b7;
         margin-top: 4px;
         margin-bottom: 40px;
     }
@@ -148,7 +148,9 @@
     transform: translateY(0); 
     pointer-events: auto;  
 }
-
+button{
+    cursor: pointer;
+}
 </style>
 
 <body>
@@ -877,11 +879,15 @@ sizes: [
                 storeUserValues.push(value);
             }
             if (item.sizes) {
-                heading = "select sizes "
-                description = "select your   sizes "
+                heading = "Leg size  "
+                description = "Do you have noticeably large or small calf muscles?"
             } else if (item.thickness) {
-                heading = "thickness"
-                description = "select number "
+                heading = "Thickness"
+                description = `Check the Shell Fit - How many fingers? <br> <br> To do this, pull the existing liner out of your shell.Stand with your bare foot inside the bare shell,with toes touching the end ofthe toe box. Bend your knees and flex forward so that you can slide your finger(s) into the shell behind your heel. <br> <br>  Do you need a 9mm, 12mm or 15mm? `
+            
+            } else if (item.stiffness) {
+                heading = "Stiffness / Liner Density"
+                description = "How do you want your liners to feel?"
             } else {
                 return
             }
