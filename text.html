@@ -9,148 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
-<style>
-    html {
-        font-family: sans-serif;
-    }
-     
-    .heading-container {
-        display: flex;
-        align-items: baseline;
-    }
-    
-    .dynamic-heading-container {
-        display: flex;
-        align-items: center;
-        font-size: 20px;
-        text-transform:capitalize ;
-    }
-    .dynamic-heading-container p{
-        font-size: 22px;
-    }
-
-   
-
-    .sub-element {
-        border: 1px solid #41221bc2;
-        border-radius: 4px;
-        background-color: #b38416;
-        padding: 10px 12px;
-        font-size: 18px;
-        margin-top: 4px;
-        cursor: pointer;
-    }
-
-    .sub-element:hover {
-        background-color: #977819;
-    }
-
-    .result-div {
-        padding: 10px 12px;
-        font-size: 18px;
-        margin-top: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-    }
-
-    .container {
-        display: flex;
-        justify-content: center;
-        padding-top: 2rem;
-        height: -webkit-fill-available;
-        /* overflow-y: scroll; */
-
-    }
-
-    input {
-        width: -webkit-fill-available;
-        background: transparent;
-        outline: none;
-        border: none;
-        border-bottom: 2px solid black;
-        padding-bottom: 6px;
-        font-size: 2rem;
-    }
-
-    input::placeholder {
-        color: #b38416;
-    }
-
-    .element-container {
-        padding-bottom: 15px;
-        border-bottom: 2px dashed black;
-        max-height: 12rem;
-        transform: translateY(-10%);
-        transition: transform 2s ease ;
-    }
-
-   
-    .sub-container {
-        display: flex;
-        flex-direction: column;
-        width: 60%;
-        /* height: 100%; */
-    }
-
-    .transition-container {
-        flex-shrink: 0;
-        transform: translateY(0);
-        transition: transform 0.5s ease-in-out;
-    }
-
-
-    .submit-btn {
-        /* display: block; */
-        margin-top: 8px;
-        background-color: black;
-        padding: 8px 18px;
-        outline: none;
-        border: none;
-        color: white;
-        font-size: 22px;
-        border-radius: 4px;
-    }
-
-    .heading {
-        /* margin-right: 10px; */
-        font-size: 20px;
-        display: flex;
-    flex-wrap: nowrap;
-        
-    }
-    .description{
-        padding: 0;
-        font-size: 20px;
-        line-height: 25px;
-        color: #c2c0c0b7;
-        margin-top: 4px;
-        margin-bottom: 40px;
-    }
-    .hidden {
-    opacity: 0;
-    display: none;
-    transform: translateY(-20px); 
-    pointer-events: none;  
-    transition: all 0.3s ease-in-out;  
-}
-
-.visible {
-    opacity: 1;
-    transform: translateY(0); 
-    pointer-events: auto;  
-}
-button{
-    cursor: pointer;
-}
-
-@media (max-width: 905px) {
-    .sub-container {
-        width: 80% !important; 
-    }
-}
-</style>
+ 
 
 <body>
     <div
@@ -946,7 +805,6 @@ input.addEventListener("input", () => {
 
         function filter() {
             const userValue = document.querySelector(".userInput").value;
-            // console.log(userValue)
             const items = document.querySelectorAll(".sub-element");
             items.forEach((item) => {
                 const singleLiText = item.innerText.toLowerCase();
@@ -956,7 +814,6 @@ input.addEventListener("input", () => {
         }
        
        
-        console.log(Application)
 
     </script>
 </body>
