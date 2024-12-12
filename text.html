@@ -728,7 +728,6 @@ sizes: [
                         submitButton.style.display="block"
                         return;
                     }
-                    // checkOverflowOfParent()
                 setTimeout(() => {
 
                     currentComponent.innerHTML = ""
@@ -843,7 +842,6 @@ sizes: [
                         transitionContainer.innerHTML = ""
                         handleNested(item);
                         checkOverflow();
-                        // checkOverflowOfParent();
                         isProcessing = false
                     }, 800);
 
@@ -876,23 +874,7 @@ sizes: [
                 getHeightContainer.style.overflowY = 'hidden';
             }
         }
-        // function checkOverflowOfParent() {
-        //     const getHeightContainer = document.querySelector('.container');
-        //     if (!getHeightContainer) {
-        //         return;
-        //     }
-
-        //     const children = getHeightContainer.children;
-        //     const totalHeight = Array.from(children).reduce((acc, child) => acc + child.offsetHeight, 0);
-
-        //     if (totalHeight > getHeightContainer.offsetHeight) {
-        //         getHeightContainer.style.overflowY = 'scroll';
-        //     } else {
-        //         getHeightContainer.style.overflowY = 'hidden';
-        //     }
-        //     console.log("element")
-        // }
-        // checkOverflowOfParent()
+       
 
         function setItems(value, item) {
 
