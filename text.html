@@ -34,13 +34,11 @@
     .sub-element {
         border: 1px solid #41221bc2;
         border-radius: 4px;
-        /* width: 100%; */
         background-color: #b38416;
         padding: 10px 12px;
         font-size: 18px;
         margin-top: 4px;
         cursor: pointer;
-        /* overflow-y: scroll; */
     }
 
     .sub-element:hover {
@@ -62,7 +60,7 @@
         justify-content: center;
         padding-top: 2rem;
         height: -webkit-fill-available;
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
 
     }
 
@@ -86,7 +84,6 @@
         max-height: 12rem;
         transform: translateY(-10%);
         transition: transform 2s ease ;
-        /* overflow-y: scroll; */
     }
 
    
@@ -148,7 +145,7 @@ button{
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 905px) {
     .sub-container {
         width: 80% !important; 
     }
@@ -159,8 +156,8 @@ button{
     <div
         style="background-image: url('./images/homepage.webp');background-position: center;background-repeat: no-repeat;height: 30rem; width: 90%; margin: auto;">
 <div class="" style="height: 100%;">
-        <div class="container">
-            <div  class="sub-container">
+        <div class="container" id="">
+            <div  class="sub-container"  >
                 <div class="transition-container">
                     <div class="heading-container">
                         <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
@@ -731,6 +728,7 @@ sizes: [
                         submitButton.style.display="block"
                         return;
                     }
+                    // checkOverflowOfParent()
                 setTimeout(() => {
 
                     currentComponent.innerHTML = ""
@@ -845,6 +843,7 @@ sizes: [
                         transitionContainer.innerHTML = ""
                         handleNested(item);
                         checkOverflow();
+                        // checkOverflowOfParent();
                         isProcessing = false
                     }, 800);
 
@@ -877,6 +876,23 @@ sizes: [
                 getHeightContainer.style.overflowY = 'hidden';
             }
         }
+        // function checkOverflowOfParent() {
+        //     const getHeightContainer = document.querySelector('.container');
+        //     if (!getHeightContainer) {
+        //         return;
+        //     }
+
+        //     const children = getHeightContainer.children;
+        //     const totalHeight = Array.from(children).reduce((acc, child) => acc + child.offsetHeight, 0);
+
+        //     if (totalHeight > getHeightContainer.offsetHeight) {
+        //         getHeightContainer.style.overflowY = 'scroll';
+        //     } else {
+        //         getHeightContainer.style.overflowY = 'hidden';
+        //     }
+        //     console.log("element")
+        // }
+        // checkOverflowOfParent()
 
         function setItems(value, item) {
 
@@ -887,6 +903,8 @@ sizes: [
                 heading = "Leg size  "
                 description = "Do you have noticeably large or small calf muscles?"
             } else if (item.thickness) {
+                const item =  document.querySelector(".container");
+               item.style.overflowY = 'scroll'
                 heading = "Thickness"
                 description = `Check the Shell Fit - How many fingers? <br> <br> To do this, pull the existing liner out of your shell.Stand with your bare foot inside the bare shell,with toes touching the end ofthe toe box. Bend your knees and flex forward so that you can slide your finger(s) into the shell behind your heel. <br> <br>  Do you need a 9mm, 12mm or 15mm? `
             
@@ -915,11 +933,14 @@ document.addEventListener('click', (event) => {
         
         const input = document.querySelector('.userInput');
         const elementContainer = document.querySelector('.element-container');
-        if (!input.contains(event.target) && !elementContainer.contains(event.target)) {
-            elementContainer.classList.remove('visible');    
-            elementContainer.classList.add('hidden');
-            submitBtn.style.display = "block"
-    }
+        if(input){
+
+            if (!input.contains(event.target) && !elementContainer.contains(event.target)) {
+                elementContainer.classList.remove('visible');    
+                elementContainer.classList.add('hidden');
+                submitBtn.style.display = "block"
+            }
+        }
     // setTimeout(()=>{
     //     elementContainer.style.display="none"
     // },2000)
@@ -943,7 +964,7 @@ input.addEventListener("input", () => {
 
         function filter() {
             const userValue = document.querySelector(".userInput").value;
-            console.log(userValue)
+            // console.log(userValue)
             const items = document.querySelectorAll(".sub-element");
             items.forEach((item) => {
                 const singleLiText = item.innerText.toLowerCase();
