@@ -138,3 +138,29 @@ cursor: pointer;
     width: 80% !important; 
 }
 }
+
+.transition-container {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+}
+
+.slide-up {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.hidden {
+    display: none; /* Temporarily hide the element but keep it in the DOM */
+}
+
+.up-arrow {
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    cursor: pointer;
+    background: #ccc;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 16px;
+}
