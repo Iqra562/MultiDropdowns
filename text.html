@@ -562,6 +562,7 @@ sizes: [
         let description = ""
         let isProcessing =false;
         let   translateYValue =0;
+        let counter = 1;
 
         Application.forEach((application) => {
             const subContainer = document.querySelector(".sub-container");
@@ -586,7 +587,7 @@ sizes: [
                         submitButton.addEventListener("click", () => {
                         
                             handleNested(item);
-
+                            counter +=1
                         })
                         isProcessing = false;
                         submitButton.style.display="block"
@@ -619,9 +620,10 @@ sizes: [
                 } else {
                     if (key === "suggestedProduct") {
                         const subContainer = document.getElementsByClassName("sub-container")[0]
+                        subContainer.innerHTML=""
                         translateYValue =0;
                     subContainer.style.transform = `translateY(-${translateYValue}rem)`;
-                    // transitionContainer.style.opacity = "0.4"
+                    // transitionContainer.style.transition = "none"
                         subContainer.innerHTML = ""
                         const subElement = document.createElement("div");
                         const paragraph = document.createElement("div");
@@ -646,7 +648,7 @@ sizes: [
 
             transitionContainer.innerHTML = `
               <div class="heading-container">
-                        <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
+                        <p class="heading">${counter} <i class="ri-arrow-right-line"></i></p>
                         <div >
                             <div class="dynamic-heading-container">
 
@@ -714,6 +716,8 @@ sizes: [
         subContainer.style.transform = `translateY(-${translateYValue}rem)`;
     }
                     // transitionContainer.style.opacity = "0.4"
+                    counter +=1
+
                         handleNested(item);
                         checkOverflow();
                         isProcessing = false
@@ -734,99 +738,6 @@ sizes: [
 
 
 
-//         function renderArray(array) {
-//     const subContainer = document.getElementsByClassName("sub-container")[0];
-
-//     // Handle sliding up of any visible components
-//     const existingTransitionContainers = subContainer.querySelectorAll(".transition-container:not(.hidden)");
-//     existingTransitionContainers.forEach((container) => {
-//         container.classList.add("slide-up");
-//         container.classList.add("hidden"); // Keep it in the DOM but visually hidden
-//     });
-
-//     // Create a new transition container
-//     const transitionContainer = document.createElement("div");
-//     transitionContainer.classList.add("transition-container");
-
-//     const userValuesContent =
-//         storeUserValues.length > 0
-//             ? storeUserValues.map((value) => `${value}`).join("-")
-//             : "<p></p>";
-
-//     transitionContainer.innerHTML = `
-//       <div class="heading-container">
-//         <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
-//         <div>
-//             <div class="dynamic-heading-container">
-//                 <p>${heading}</p>
-//                 ( <div>
-//                     <p>${userValuesContent}</p>
-//                 </div> )*
-//             </div>
-//             <div>
-//                 <p class="description">${description}</p>
-//             </div>
-//         </div>
-//         <button class="up-arrow" onclick="scrollToPrevious()">⬆️</button>
-//       </div>
-//     `;
-
-//     const inputContainer = document.createElement("div");
-//     const elementContainer = document.createElement("div");
-//     elementContainer.classList.add("element-container", "hidden");
-//     inputContainer.classList.add("input-container");
-
-//     const inputElement = document.createElement("input");
-//     inputElement.type = "text";
-//     inputElement.classList.add("userInput");
-//     inputElement.value = "";
-//     inputElement.placeholder = "Type or select an option";
-//     inputElement.addEventListener("input", filter);
-//     inputElement.addEventListener("click", showElementContainer);
-
-//     const submitButton = document.createElement("button");
-//     submitButton.classList.add("submit-btn");
-//     submitButton.textContent = "OK";
-
-//     inputContainer.appendChild(inputElement);
-//     transitionContainer.appendChild(inputContainer);
-//     transitionContainer.appendChild(elementContainer);
-//     transitionContainer.appendChild(submitButton);
-//     subContainer.appendChild(transitionContainer);
-
-//     array.forEach((item, index) => {
-//         const valuesInItem = item.name || item.type || item.thickness || item.stiffness || "View Details";
-//         const subElement = document.createElement("div");
-//         subElement.classList.add("sub-element");
-//         subElement.textContent = valuesInItem;
-
-//         subElement.addEventListener("click", () => {
-//             if (isProcessing) return;
-//             isProcessing = true;
-
-//             setItems(valuesInItem, item);
-//             inputElement.value = valuesInItem;
-
-//             if (item.suggestedProduct) {
-//                 submitButton.innerText = "Submit";
-//                 submitButton.addEventListener("click", () => {
-//                     handleNested(item);
-//                 });
-//                 isProcessing = false;
-//                 submitButton.style.display = "block";
-//                 return; 
-//             }
-//             setTimeout(() => {
-//                 transitionContainer.innerHTML = "";
-//                 handleNested(item);
-//                 checkOverflow();
-//                 isProcessing = false;
-//             }, 800);
-//         });
-
-//         elementContainer.appendChild(subElement);
-//     });
-// }
 
 
 
@@ -872,10 +783,12 @@ sizes: [
 
         function showElementContainer() {
     const elementContainers = document.querySelectorAll('.element-container');
-    let submitBtn = document.querySelector('.submit-btn');
+    let submitBtn = document.querySelectorAll('.submit-btn');
    if(submitBtn){
 
-       submitBtn.style.display = "none";
+    submitBtn.forEach((submitBtn) => {
+        submitBtn.style.display = "none";
+        });
     }
 
     if (elementContainers.length > 0) {
@@ -883,29 +796,38 @@ sizes: [
             elementContainer.classList.remove('hidden');
             elementContainer.classList.add('visible');
         });
+        checkOverflow();
     }
 
-    checkOverflow();
 }
 
 
 document.addEventListener('click', (event) => {
-        const submitBtn = document.querySelector('.submit-btn');
-        
-        const input = document.querySelector('.userInput');
-        const elementContainer = document.querySelector('.element-container');
-        if(input){
+    const submitBtns = document.querySelectorAll('.submit-btn'); // Handle multiple submit buttons
+    const inputs = document.querySelectorAll('.userInput'); // Handle multiple inputs
+    const elementContainers = document.querySelectorAll('.element-container'); // Handle multiple containers
 
-            if (!input.contains(event.target) && !elementContainer.contains(event.target)) {
-                elementContainer.classList.remove('visible');    
-                elementContainer.classList.add('hidden');
-                submitBtn.style.display = "block"
+    inputs.forEach((input, index) => {
+        let isClickInside = input.contains(event.target); // Check if the click is inside this input
+
+        if (!isClickInside && elementContainers[index] && elementContainers[index].contains(event.target)) {
+            isClickInside = true;
+        }
+
+        if (!isClickInside) {
+            if (elementContainers[index]) {
+                elementContainers[index].classList.remove('visible');
+                elementContainers[index].classList.add('hidden');
+            }
+
+            if (submitBtns[index]) {
+                submitBtns[index].style.display = "block";
             }
         }
-    // setTimeout(()=>{
-    //     elementContainer.style.display="none"
-    // },2000)
+    });
 });
+
+
 
  
 
