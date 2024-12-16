@@ -587,17 +587,16 @@ sizes: [
                         submitButton.addEventListener("click", () => {
                         
                             handleNested(item);
-                            counter +=1
                         })
                         isProcessing = false;
                         submitButton.style.display="block"
                         return;
                     }
-                setTimeout(() => {
-                    translateYValue +=30
-                    subContainer.style.transform = `translateY(-${translateYValue}rem)`;
-                    transitionContainer.style.opacity = "0.4"
-                    // currentComponent.innerHTML = ""
+                    setTimeout(() => {
+                        translateYValue +=30
+                        subContainer.style.transform = `translateY(-${translateYValue}rem)`;
+                        transitionContainer.style.opacity = "0.4"
+                        counter +=1
 
                     handleNested(application)
                     checkOverflow();

@@ -30,6 +30,7 @@ html {
     align-items: center;
     font-size: 20px;
     text-transform:capitalize ;
+    color: #c2c0c0b7;
 }
 .dynamic-heading-container p{
     font-size: 22px;
@@ -119,6 +120,7 @@ input::placeholder {
     font-size: 20px;
     display: flex;
 flex-wrap: nowrap;
+color: #c2c0c0b7;
     
 }
 .description{
@@ -163,6 +165,7 @@ cursor: pointer;
 
 .hidden {
     display: none;  
+    /* visibility: hidden; */
 }
 
 .up-arrow {
