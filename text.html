@@ -780,54 +780,56 @@ sizes: [
             }
 
         }
-
         function showElementContainer() {
     const elementContainers = document.querySelectorAll('.element-container');
-    let submitBtn = document.querySelectorAll('.submit-btn');
-   if(submitBtn){
+    const submitBtns = document.querySelectorAll('.submit-btn');
 
-    submitBtn.forEach((submitBtn) => {
-        submitBtn.style.display = "none";
+    if (submitBtns) {
+        submitBtns.forEach((submitBtn) => {
+            submitBtn.style.display = "none";
         });
     }
 
     if (elementContainers.length > 0) {
         elementContainers.forEach((elementContainer) => {
             elementContainer.classList.remove('hidden');
+
+            void elementContainer.offsetWidth;
+
             elementContainer.classList.add('visible');
         });
-        checkOverflow();
-    }
 
+        checkOverflow();  
+    }
 }
 
-
 document.addEventListener('click', (event) => {
-    const submitBtns = document.querySelectorAll('.submit-btn'); // Handle multiple submit buttons
-    const inputs = document.querySelectorAll('.userInput'); // Handle multiple inputs
-    const elementContainers = document.querySelectorAll('.element-container'); // Handle multiple containers
+    const submitBtns = document.querySelectorAll('.submit-btn'); 
+    const inputs = document.querySelectorAll('.userInput');  
+    const elementContainers = document.querySelectorAll('.element-container');  
 
     inputs.forEach((input, index) => {
-        let isClickInside = input.contains(event.target); // Check if the click is inside this input
+        let isClickInside = input.contains(event.target); 
 
-        if (!isClickInside && elementContainers[index] && elementContainers[index].contains(event.target)) {
+        if (elementContainers[index] && elementContainers[index].contains(event.target)) {
             isClickInside = true;
         }
 
         if (!isClickInside) {
             if (elementContainers[index]) {
                 elementContainers[index].classList.remove('visible');
-                elementContainers[index].classList.add('hidden');
+
+                setTimeout(() => {
+                    elementContainers[index].classList.add('hidden');
+                }, 300); 
             }
 
             if (submitBtns[index]) {
-                submitBtns[index].style.display = "block";
+                submitBtns[index].style.display = "block";  
             }
         }
     });
 });
-
-
 
  
 

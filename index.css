@@ -16,6 +16,8 @@ html {
     transition: transform 0.5s ease-in-out;
     transition: transform 0.5s ease, opacity 0.5s ease;
     position: relative;
+    box-sizing: border-box;
+    padding-top: 32px;
 }
  
 .heading-container {
@@ -110,7 +112,7 @@ input::placeholder {
     color: white;
     font-size: 22px;
     border-radius: 4px;
-}
+} 
 
 .heading {
     /* margin-right: 10px; */
@@ -128,18 +130,21 @@ flex-wrap: nowrap;
     margin-bottom: 40px;
 }
 .hidden {
-opacity: 0;
-display: none;
-transform: translateY(-20px); 
-pointer-events: none;  
-transition: all 0.3s ease-in-out;  
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none; 
+    visibility: hidden;  
+    transition: opacity 0.1s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .visible {
-opacity: 1;
-transform: translateY(0); 
-pointer-events: auto;  
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;  
+    visibility: visible; 
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
 button{
 cursor: pointer;
 }
@@ -157,7 +162,7 @@ cursor: pointer;
 }
 
 .hidden {
-    display: none; /* Temporarily hide the element but keep it in the DOM */
+    display: none;  
 }
 
 .up-arrow {
