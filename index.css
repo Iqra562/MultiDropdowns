@@ -1,9 +1,18 @@
 html {
     font-family: sans-serif;
 }
-.container{
-    overflow: hidden;
+.result-div{
+    font-size: 45px;
 }
+
+.main-element-container{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    height: -webkit-fill-available;
+
+}
+
 .sub-container{
     flex-shrink: 0;
     transform: translateY(0);
@@ -17,7 +26,7 @@ html {
     transition: transform 0.5s ease, opacity 0.5s ease;
     position: relative;
     box-sizing: border-box;
-    padding-top: 32px;
+    padding-top: 100px;
 }
  
 .heading-container {
@@ -62,14 +71,6 @@ html {
     height: 100%;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    /* padding-top: 2rem; */
-    height: -webkit-fill-available;
-    /* overflow-y: scroll; */
-
-}
 
 input {
     width: -webkit-fill-available;
@@ -83,6 +84,7 @@ input {
 
 input::placeholder {
     color: #b38416;
+
 }
 
 .element-container {
@@ -91,6 +93,7 @@ input::placeholder {
     max-height: 12rem;
     transform: translateY(-10%);
     transition: transform 2s ease ;
+    
 }
 
 
