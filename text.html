@@ -13,14 +13,19 @@
 
 <body>
     <div
-        style="background-image: url('./images/homepage.webp');background-position: center;background-repeat: no-repeat;height: 30rem; width: 100%; margin: auto;">
+        style="background-image: url('./images/download.jpeg');background-position: right center;background-repeat: no-repeat; background-attachment: fixed;;height: 30rem; width: 100%; margin: auto;">
 <div class="" style="height: 100%;">
         <div class="main-element-container" id="">
             <div  class="sub-container"  >
                 <div class="transition-container">
-                    <div class="heading-container">
-                        <p class="heading">1 <i class="ri-arrow-right-line"></i></p>
-                        <div >
+                    <div class="counter-container">
+
+                        <p class="heading">1</p>
+
+                        <i class="ri-arrow-right-line" ></i>
+                    </div>
+                    <div >
+                        <div class="heading-container" >
                             <div class="dynamic-heading-container">
 
                                 <p>Application</p>
@@ -30,7 +35,6 @@
                                 <p class="description">How do you plan to use these liners?  </p>
                             </div>
                         </div>
-                    </div>
                     <div class="input-container">
 
                         <input type="text" class="userInput " value="" oninput="filter()"
@@ -42,6 +46,8 @@
                     <button class="submit-btn">
                         ok
                     </button>
+                </div>
+
                 </div>
             </div>
 
@@ -586,7 +592,7 @@ sizes: [
                         submitButton.innerText = "Submit"
                         submitButton.addEventListener("click", () => {
                         
-                            handleNested(item);
+                            handleNested(application);
                         })
                         isProcessing = false;
                         submitButton.style.display="block"
@@ -836,19 +842,22 @@ document.addEventListener('click', (event) => {
  
 
         function filter() {
-            const userValue = document.querySelector(".userInput");
-            const filterText = userValue.value.toLowerCase();
-    const subElements = document.querySelectorAll(".sub-element");
+            const userValue = document.querySelectorAll(".userInput");
+            const subElements = document.querySelectorAll(".sub-element");
+            userValue.forEach((eachInput)=>{
+        const filterText = eachInput.value.toLowerCase();
 
-    subElements.forEach((subElement) => {
-        const text = subElement.textContent.toLowerCase();
-        if (text.includes(filterText)) {
-            subElement.style.display = "block"; 
-        } else {
-            subElement.style.display = "none"; 
-        }
-    });
-    checkOverflow()
+        
+        subElements.forEach((subElement) => {
+            const text = subElement.textContent.toLowerCase();
+            if (text.includes(filterText)) {
+                subElement.style.display = "block"; 
+            } else {
+                subElement.style.display = "none"; 
+            }
+        });
+    })
+            checkOverflow()
         }
        
        console.log(Application)
@@ -856,4 +865,4 @@ document.addEventListener('click', (event) => {
     </script>
 </body>
 
-</html>
+</html> 
