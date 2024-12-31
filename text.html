@@ -40,9 +40,9 @@
                         <input type="text" class="userInput " value="" oninput="filter()"
                             placeholder="Type or select an option"  onclick="showElementContainer()">
                     </div>
-                    <button class="submit-btn">
-                        ok
-                    </button>
+                    <!-- <button class="submit-btn">
+                        Ok
+                    </button> -->
                     <div class="element-container  ">
 
                     </div>
@@ -676,7 +676,7 @@ sizes: [
 
             const inputContainer = document.createElement("div");
             const elementContainer = document.createElement("div");
-            elementContainer.classList.add("element-container","hidden");
+            // elementContainer.classList.add("element-container","hiden");
             inputContainer.classList.add("input-container");
 
             const inputElement = document.createElement("input");
@@ -827,9 +827,9 @@ document.addEventListener('click', (event) => {
             if (elementContainers[index]) {
                 elementContainers[index].classList.remove('visible');
 
-                setTimeout(() => {
-                    elementContainers[index].classList.add('hidden');
-                }, 300); 
+                elementContainers[index].classList.add('hidden');
+                // setTimeout(() => {
+                // }, 300); 
             }
 
             if (submitBtns[index]) {
