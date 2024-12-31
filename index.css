@@ -135,7 +135,7 @@ input::placeholder {
  
 
 .submit-btn {
-    /* display: block; */
+    display: block;
     margin-top: 15px;
     background-color: black;
     padding: 8px 18px;
@@ -165,9 +165,10 @@ color: black;
 }
 .hidden {
     opacity: 0;
+    /* visibility: hidden; */
     height: 10px;
     transform: translateY(-15px) ;
-    pointer-events: none;
+    pointer-events:none;
     border: none;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -175,7 +176,7 @@ color: black;
 .visible {
     opacity: 1;
     transform: translateY(0);
-    /* pointer-events: auto;   */
+    pointer-events: auto;  
     /* visibility: visible;  */
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }

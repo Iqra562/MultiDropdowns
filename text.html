@@ -40,9 +40,9 @@
                         <input type="text" class="userInput " value="" oninput="filter()"
                             placeholder="Type or select an option"  onclick="showElementContainer()">
                     </div>
-                    <!-- <button class="submit-btn">
+                    <button class="submit-btn">
                         Ok
-                    </button> -->
+                    </button>
                     <div class="element-container  ">
 
                     </div>
@@ -828,12 +828,13 @@ document.addEventListener('click', (event) => {
                 elementContainers[index].classList.remove('visible');
 
                 elementContainers[index].classList.add('hidden');
-                // setTimeout(() => {
-                // }, 300); 
+                
             }
 
             if (submitBtns[index]) {
-                submitBtns[index].style.display = "block";  
+                 setTimeout(() => {
+                    submitBtns[index].style.display = "block";  
+                    }, 300); 
             }
         }
     });
