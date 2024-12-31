@@ -145,6 +145,7 @@ input::placeholder {
     font-size: 22px;
     font-weight: bold;
     border-radius: 4px;
+    position: absolute;
 } 
 
 .heading {
@@ -166,11 +167,11 @@ color: black;
 .hidden {
     opacity: 0;
     /* visibility: hidden; */
-    height: 10px;
+    height: 6px;
     transform: translateY(-15px) ;
     pointer-events:none;
     border: none;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .visible {
