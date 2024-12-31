@@ -13,7 +13,7 @@
 
 <body>
     <div
-        style="background-image: url('./images/download.jpeg');background-position: right center;background-repeat: no-repeat; background-attachment: fixed;;height: 30rem; width: 100%; margin: auto;">
+        style="background-image: url('./images/download.jpeg');background-position: bottom center;background-repeat: no-repeat; background-attachment: fixed;height: 30rem; width: 80%; margin: auto;">
 <div class="" style="height: 100%;">
         <div class="main-element-container" id="">
             <div  class="sub-container"  >
@@ -24,7 +24,7 @@
 
                         <i class="ri-arrow-right-line" ></i>
                     </div>
-                    <div >
+                    <div  class="aside-element">
                         <div class="heading-container" >
                             <div class="dynamic-heading-container">
 
@@ -40,12 +40,12 @@
                         <input type="text" class="userInput " value="" oninput="filter()"
                             placeholder="Type or select an option"  onclick="showElementContainer()">
                     </div>
-                    <div class="element-container hidden">
-
-                    </div>
                     <button class="submit-btn">
                         ok
                     </button>
+                    <div class="element-container  ">
+
+                    </div>
                 </div>
 
                 </div>
@@ -851,7 +851,7 @@ document.addEventListener('click', (event) => {
         subElements.forEach((subElement) => {
             const text = subElement.textContent.toLowerCase();
             if (text.includes(filterText)) {
-                subElement.style.display = "block"; 
+                subElement.style.opacity = 1; 
             } else {
                 subElement.style.display = "none"; 
             }
